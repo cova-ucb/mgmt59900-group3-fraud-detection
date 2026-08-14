@@ -55,7 +55,7 @@ Time-based split on `step` (not random shuffling), so the model never trains on 
 
 **Note on the fraud-rate progression:** fraud rate rises sharply across later steps because transaction *volume* drops off in the later simulation period while fraud *count* stays roughly flat, the same pattern found in Phase D's hour-of-day query (fraud rate spikes during low-traffic windows). This is a real, documented characteristic of the dataset, not a split error.
 
-**Note on scoping's effect on these rates:** scoping to TRANSFER/CASH_OUT roughly doubles the fraud rate at every split level compared to training on the full unscoped dataset (e.g., test fraud rate rises from 1.34% to 3.23%). This is not because more fraud exists; all 8,213 fraud cases remain, and the test set still contains roughly 1,654 of them either way. It is because the non-fraud denominator shrinks once transaction types that never contain fraud are removed.
+**Note on scoping's effect on these rates:** scoping to TRANSFER/CASH_OUT roughly doubles the fraud rate at every split level compared to training on the full unscoped dataset (e.g., test fraud rate rises from 1.34% to 3.23%). This is not because more fraud exists; all 8,213 fraud cases remain, and the test set still contains exactly 1,654 of them either way. It is because the non-fraud denominator shrinks once transaction types that never contain fraud are removed.
 
 ## Class-Imbalance Handling
 
@@ -89,7 +89,7 @@ The redo changed two things at once: which transactions the model trains on (sco
 
 These are this run's numbers only (scoped, leakage-corrected), the ones that should be used in the Report and presentation:
 
-| Model | Precision | Recall | AUCPR | Fraud cases caught (of ~1,654) |
+| Model | Precision | Recall | AUCPR | Fraud cases caught (of 1,654) |
 |---|---|---|---|---|
 | `isflaggedfraud` baseline | 1.000 | 0.0048 | n/a | ~8 |
 | Logistic Regression | 0.1583 | 0.4347 | **0.2109** | ~719 |
